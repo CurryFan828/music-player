@@ -33,3 +33,45 @@ export const AllSongs = () => {
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+// -------------------- New Version --------------------
+// import React from "react";
+// import { useMusic } from "../contexts/MusicContext";
+
+// const AllSongs = () => {
+//   const { allSongs, setCurrentSong } = useMusic();
+
+//   return (
+//     <div className="all-songs">
+//       {allSongs.length === 0 ? (
+//         <p className="empty-message">No songs found. Search above to load songs!</p>
+//       ) : (
+//         allSongs.map((song) => (
+//           <div
+//             key={song.id}
+//             className="song-item"
+//             onClick={() => setCurrentSong(song)}
+//           >
+//             <img src={song.image} alt={song.album} className="song-cover" />
+//             <div className="song-info">
+//               <span className="song-title">{song.title}</span>
+//               <span className="song-artist">{song.artist}</span>
+//             </div>
+//             <span className="song-duration">{song.duration}</span>
+//           </div>
+//         ))
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AllSongs;
