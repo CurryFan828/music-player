@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState} from 'react' // Import the createContext function from React to create a new context for the music player
+import { getSongs } from "../services/jamendo"; // Import the getSongs function from the api/jamendo file to fetch songs from the Jamendo API
 
 const MusicContext = createContext() // Create a new context for the music player
 
@@ -89,6 +90,11 @@ export const MusicProvider = ({ children }) => {
         }
     }, [playlists])
 
+
+    useEffect(() => {
+        searchSongs("pop");
+    }, []);
+
     const handlePlaySong = (song, index) => {
         setCurrentTrack(song) // Set the current track to the selected song
         setCurrentTrackIndex(index) // Set the current track index to the index of the selected song
@@ -148,6 +154,17 @@ export const MusicProvider = ({ children }) => {
         );
     }
 
+
+    const searchSongs = async (query) => {
+    try {
+        const songs = await getSongs(query);
+        setAllSongs(songs);
+        if (!currentSong && songs.length > 0) setCurrentSong(songs[0]);
+    } catch (err) {
+        console.error("Error fetching songs:", err);
+    }
+    };
+
     const play = () => setIsPlaying(true); // Set isPlaying to true when play is triggered
     const pause = () => setIsPlaying(false); // Set isPlaying to false when pause is triggered
 
@@ -190,3 +207,107 @@ export const useMusic = () => {
     
     return contextValue // Return the context value so that it can be used in other components
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------- New Version --------------------
+
+// import { createContext, useContext, useState } from "react";
+
+// const MusicContext = createContext();
+
+// export const MusicProvider = ({ children }) => {
+//   // Songs from API
+//   const [allSongs, setAllSongs] = useState([]);
+//   const [currentSong, setCurrentSong] = useState(null);
+
+//   // Player state
+//   const [isPlaying, setIsPlaying] = useState(false);
+//   const [currentTime, setCurrentTime] = useState(0);
+//   const [duration, setDuration] = useState(0);
+
+//   // Playlists
+//   const [playlists, setPlaylists] = useState([]);
+
+//   // --- API Fetch Function ---
+//   const searchSongs = async (query) => {
+//     if (!query) return setAllSongs([]);
+//     try {
+//       const res = await fetch(
+//         `https://api.jamendo.com/v3.0/tracks/?client_id=e38b6619&format=json&limit=20&namesearch=${encodeURIComponent(
+//           query
+//         )}&audioformat=mp31`
+//       );
+//       const data = await res.json();
+
+//       const formatted = data.results.map((song) => ({
+//         id: song.id,
+//         title: song.name,
+//         artist: song.artist_name,
+//         album: song.album_name,
+//         image: song.image, // album cover
+//         audio: song.audio, // streamable mp3
+//         duration: Math.floor(song.duration / 60) + ":" + (song.duration % 60).toString().padStart(2, "0"),
+//       }));
+
+//       setAllSongs(formatted);
+//       if (!currentSong && formatted.length > 0) setCurrentSong(formatted[0]);
+//     } catch (error) {
+//       console.error("Error fetching songs:", error);
+//     }
+//   };
+
+//   // --- Player controls ---
+//   const play = () => setIsPlaying(true);
+//   const pause = () => setIsPlaying(false);
+
+//   // --- Playlists ---
+//   const createPlaylist = (name) => {
+//     const newPlaylist = { id: Date.now(), name, songs: [] };
+//     setPlaylists((prev) => [...prev, newPlaylist]);
+//   };
+
+//   const addSongToPlaylist = (playlistId, song) => {
+//     setPlaylists((prev) =>
+//       prev.map((pl) => (pl.id === playlistId ? { ...pl, songs: [...pl.songs, song] } : pl))
+//     );
+//   };
+
+//   return (
+//     <MusicContext.Provider
+//       value={{
+//         allSongs,
+//         currentSong,
+//         setCurrentSong,
+//         isPlaying,
+//         play,
+//         pause,
+//         currentTime,
+//         setCurrentTime,
+//         duration,
+//         setDuration,
+//         playlists,
+//         createPlaylist,
+//         addSongToPlaylist,
+//         searchSongs,
+//       }}
+//     >
+//       {children}
+//     </MusicContext.Provider>
+//   );
+// };
+
+// export const useMusic = () => {
+//   const context = useContext(MusicContext);
+//   if (!context) throw new Error("useMusic must be used within MusicProvider");
+//   return context;
+// };
