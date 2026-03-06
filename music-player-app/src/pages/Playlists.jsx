@@ -1,13 +1,27 @@
 import { useState } from "react"
 import { useMusic } from "../contexts/MusicContext"
+import { useAuth } from "../contexts/AuthContexts"
+
 
 export const Playlists = () => {
+  // const { user } = useAuth()
+
   const [newPlaylistName, setNewPlaylistName] = useState("") // State to track the name of the new playlist being created
   const [selectedPlaylist, setSelectedPlaylist] = useState(null) // State to track the currently selected playlist for adding songs
   const [searchQuery, setSearchQuery] = useState("") // State to track the search query for filtering songs when adding to a playlist
   const [showDropdown, setShowDropdown] = useState(false) // State to track whether the dropdown for adding songs to a playlist is visible or not 
 
   const { playlists, createPlaylist, allSongs, addSongToPlaylist, currentTrackIndex, handlePlaySong, deletePlaylist} = useMusic();
+
+  // const newPlaylist = {
+  //   id: Date.now(),
+  //   name: playlistName,
+  //   songs: [],
+  //   owner: user.username
+  // }
+
+  // setPlaylists([...playlists, newPlaylist])
+
 
   {/* Filter Variable */}
   const filteredSongs = allSongs.filter((song) => {
@@ -160,114 +174,3 @@ export const Playlists = () => {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ----------------------- New Version --------------------
-// import React, { useState } from "react";
-// import { useMusic } from "../contexts/MusicContext";
-
-// const Playlists = () => {
-//   const {
-//     playlists,
-//     createPlaylist,
-//     allSongs,
-//     addSongToPlaylist,
-//     setCurrentSong,
-//   } = useMusic();
-
-//   const [newPlaylistName, setNewPlaylistName] = useState("");
-//   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-//   const [searchQuery, setSearchQuery] = useState("");
-
-//   const filteredSongs = allSongs.filter(
-//     (song) =>
-//       song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//       song.artist.toLowerCase().includes(searchQuery.toLowerCase())
-//   );
-
-//   const handleCreatePlaylist = () => {
-//     if (newPlaylistName.trim()) {
-//       createPlaylist(newPlaylistName.trim());
-//       setNewPlaylistName("");
-//     }
-//   };
-
-//   const handleAddSong = (song) => {
-//     if (selectedPlaylist) {
-//       addSongToPlaylist(selectedPlaylist.id, song);
-//       setSearchQuery("");
-//       setSelectedPlaylist(null);
-//     }
-//   };
-
-//   return (
-//     <div className="playlists">
-//       <h2>Playlists</h2>
-//       <div className="create-playlist">
-//         <input
-//           type="text"
-//           placeholder="Playlist Name..."
-//           value={newPlaylistName}
-//           onChange={(e) => setNewPlaylistName(e.target.value)}
-//         />
-//         <button onClick={handleCreatePlaylist}>Create</button>
-//       </div>
-
-//       <div className="playlists-list">
-//         {playlists.map((pl) => (
-//           <div key={pl.id} className="playlist-item">
-//             <h3>{pl.name}</h3>
-//             <input
-//               type="text"
-//               placeholder="Search songs..."
-//               value={selectedPlaylist?.id === pl.id ? searchQuery : ""}
-//               onChange={(e) => {
-//                 setSearchQuery(e.target.value);
-//                 setSelectedPlaylist(pl);
-//               }}
-//             />
-//             {selectedPlaylist?.id === pl.id &&
-//               searchQuery &&
-//               filteredSongs.slice(0, 5).map((song) => (
-//                 <div
-//                   key={song.id}
-//                   className="dropdown-item"
-//                   onClick={() => handleAddSong(song)}
-//                 >
-//                   <img src={song.image} alt={song.album} className="song-cover-small" />
-//                   <span>{song.title}</span> - <span>{song.artist}</span>
-//                 </div>
-//               ))}
-
-//             <div className="playlist-songs">
-//               {pl.songs.map((song) => (
-//                 <div
-//                   key={song.id}
-//                   className="playlist-song"
-//                   onClick={() => setCurrentSong(song)}
-//                 >
-//                   <img src={song.image} alt={song.album} className="song-cover-small" />
-//                   <span>{song.title}</span> - <span>{song.artist}</span>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Playlists;

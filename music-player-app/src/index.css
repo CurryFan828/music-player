@@ -824,3 +824,213 @@ body {
 .close-btn:hover {
   background: rgba(255, 107, 107, 0.3);
 }
+
+
+/* Profile Page */
+
+.profile {
+  text-align: center;
+}
+
+.profile h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Profile Card */
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Avatar */
+
+.profile-avatar {
+  font-size: 3rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.2);
+  border: 2px solid rgba(16, 185, 129, 0.5);
+}
+
+/* Profile Info */
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-info p {
+  margin: 0.25rem 0;
+}
+
+/* Admin Badge */
+
+.admin-badge {
+  margin-top: 0.5rem;
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.6);
+}
+
+/* Login Form */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Inputs */
+
+.login-input {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.95rem;
+}
+
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Login Button */
+
+.login-btn {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: #10b981;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #059669;
+  transform: scale(1.03);
+}
+
+/* Logout Button */
+
+.logout-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 107, 107, 0.3);
+  transform: scale(1.05);
+}
+
+/* Errors */
+
+.login-error {
+  margin-top: 1rem;
+  color: #ff6b6b;
+}
+
+/* Demo Accounts */
+
+.demo-accounts {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Password Wrapper */
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Make input full width like username */
+
+.password-input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+/* Eye icon inside the field */
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.password-toggle:hover {
+  color: white;
+}
+
+.password-toggle svg {
+  transition: transform 0.15s ease;
+}
+
+.password-toggle:hover svg {
+  transform: scale(1.15);
+}
+
+/* Role Selection */
+
+.role-select {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Role Buttons */
+
+.role-btn {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Selected Role */
+ .role-btn.active {
+  border-color: #10b981;
+  color: white;
+  background-color: rgba(16, 185, 129, 0.2); /* faint green fill */
+  box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.4); /* subtle inner glow */
+  transition: all 0.3s ease;
+}
