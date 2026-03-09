@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router"
 import { MusicProvider } from "./contexts/MusicContext"
 import { Navbar } from "./components/Navbar"
 import { AuthProvider } from "./contexts/AuthContexts"
+import { ProtectedRoute } from "./components/ProtectedRoutes"
 
 
 
@@ -24,9 +25,21 @@ function App() {
             </div>
             <div className="content-section">
               <Routes>
-                <Route path="/" element={<AllSongs />} />
-                <Route path="/playlists" element={<Playlists />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/" element={
+                  <ProtectedRoute>
+                    <AllSongs />
+                  </ProtectedRoute>
+                } />
+                <Route path="/playlists" element={
+                  <ProtectedRoute>
+                    <Playlists />
+                  </ProtectedRoute>
+                } />
+                <Route path="/profile" element={
+                  // <ProtectedRoute>
+                    <Profile />
+                  /* </ProtectedRoute> */
+                }/>
                 <Route path="*" element={<PageNotFound />} />
               </Routes>
             </div>
