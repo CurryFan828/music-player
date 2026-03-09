@@ -1,10 +1,18 @@
 import { useMusic } from '../contexts/MusicContext'
+import { useEffect } from 'react'
 
 // This function component will display all of the songs in the music player app. 
 // It will use the useMusic hook to get the list of all songs and the function to 
 // handle playing a song. It will also display the currently playing song and its details.
 export const AllSongs = () => {
   const { allSongs, handlePlaySong, currentTrackIndex } = useMusic() // Get all songs and handlePlaySong from the useMusic hook
+
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then(res => res.text())
+      .then(data => console.log(data))
+  }, [])
 
   return (
     <div className="all-songs">

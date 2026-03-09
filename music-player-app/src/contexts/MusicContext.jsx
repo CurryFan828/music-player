@@ -159,7 +159,7 @@ export const MusicProvider = ({ children }) => {
     try {
         const songs = await getSongs(query);
         setAllSongs(songs);
-        if (!currentSong && songs.length > 0) setCurrentSong(songs[0]);
+        if (!currentTrack && songs.length > 0) setCurrentTrack(songs[0]);
     } catch (err) {
         console.error("Error fetching songs:", err);
     }
