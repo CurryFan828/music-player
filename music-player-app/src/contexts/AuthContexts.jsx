@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode"
 const AuthContext = createContext()
 
 // Backend URL
-const BACKEND_URL = "http://localhost:5000"
+const BACKEND_URL = "https://mp-backend-one.vercel.app"
 
 // AuthProvider wraps the app and provides auth functions/data
 export const AuthProvider = ({ children }) => {
